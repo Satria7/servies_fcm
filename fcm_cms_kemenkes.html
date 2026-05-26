@@ -689,7 +689,7 @@
     </div>
     <div class="field">
       <label class="field-label">Python Backend URL</label>
-      <input type="text" id="backend_url" value="http://localhost:5000/send">
+      <input type="text" id="backend_url" value="https://web-production-dfd6e.up.railway.app/send">
     </div>
     <button class="btn-send btn-blue" onclick="sendNotif()" id="send-btn">
       <span class="btn-label">Kirim Notifikasi</span>
@@ -721,11 +721,11 @@ function setMode(mode) {
   if (mode === 'broadcast') {
     btn.className = 'btn-send btn-green';
     btn.querySelector('.btn-label').textContent = 'Kirim ke Semua User';
-    urlInput.value = 'http://localhost:5000/send-topic';
+    urlInput.value = 'https://web-production-dfd6e.up.railway.app/send-topic';
   } else {
     btn.className = 'btn-send btn-blue';
     btn.querySelector('.btn-label').textContent = 'Kirim Notifikasi';
-    urlInput.value = 'http://localhost:5000/send';
+    urlInput.value = 'https://web-production-dfd6e.up.railway.app/send';
   }
 }
 
