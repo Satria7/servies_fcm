@@ -12,6 +12,7 @@ import google.auth.transport.requests
 from google.oauth2 import service_account
 import requests
 import os
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -20,10 +21,18 @@ PROJECT_ID = "klik-ngoerah"
 SERVICE_ACCOUNT_FILE = "serviceAccount.json"
 
 def get_access_token():
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE,
-        scopes=["https://www.googleapis.com/auth/firebase.messaging"]
-    )
+    sa_json = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+    if sa_json:
+        sa_info = json.loads(sa_json)
+        credentials = service_account.Credentials.from_service_account_info(
+            sa_info,
+            scopes=["https://www.googleapis.com/auth/firebase.messaging"]
+        )
+    else:
+        credentials = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE,
+            scopes=["https://www.googleapis.com/auth/firebase.messaging"]
+        )
     req = google.auth.transport.requests.Request()
     credentials.refresh(req)
     return credentials.token
