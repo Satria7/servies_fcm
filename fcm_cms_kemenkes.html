@@ -239,6 +239,13 @@
   #fcm-root .kat-umum:hover { border-color: #2a7a4e; background: rgba(42,122,78,0.03); }
   #fcm-root .kat-umum.active { border-color: #2a7a4e; background: rgba(42,122,78,0.06); box-shadow: 0 0 0 3px rgba(42,122,78,0.08); }
 
+  #fcm-root .kat-weburl:hover { border-color: #4f46e5; background: rgba(79,70,229,0.03); }
+  #fcm-root .kat-weburl.active { border-color: #4f46e5; background: rgba(79,70,229,0.06); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+  #fcm-root .kat-weburl.active .kat-check { background: #4f46e5; border-color: #4f46e5; color: white; }
+  #fcm-root .kat-weburl .kat-name { color: #4338ca; }
+  #fcm-root .kat-result.on-weburl { border-color: rgba(79,70,229,0.3); background: rgba(79,70,229,0.04); color: #3a5068; }
+  #fcm-root .hl-indigo { color: #4338ca; font-weight: 700; }
+
   #fcm-root .kat-check { position: absolute; top: 10px; right: 12px; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #dce6ef; display: flex; align-items: center; justify-content: center; font-size: 9px; transition: all 0.15s; color: transparent; }
   #fcm-root .kat-notify.active .kat-check { background: #07B8A4; border-color: #07B8A4; color: white; }
   #fcm-root .kat-umum.active .kat-check { background: #2a7a4e; border-color: #2a7a4e; color: white; }
@@ -347,7 +354,7 @@
         <label class="field-label">FCM Token *</label>
         <textarea id="fcm_token" placeholder="Paste FCM token device tujuan..."></textarea>
       </div>
-      <div class="field-row">
+      <!-- <div class="field-row">
         <div class="field">
           <label class="field-label">No. Rekam Medis</label>
           <input type="text" id="no_rm" placeholder="77777777">
@@ -356,7 +363,7 @@
           <label class="field-label">Device ID</label>
           <input type="text" id="device_id" placeholder="TKQ1.221114.001">
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- 2b. Broadcast -->
@@ -403,28 +410,30 @@
     </div>
 
     <!-- 4. Kategori -->
-    <div class="card">
-      <div class="card-head">
-        <div class="card-step">4</div>
-        <div class="card-title">Kategori Aksi</div>
+    <div class="kat-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="kat-item kat-notify" id="card-notify" onclick="fcmSelectKat('notify')">
+        <div class="kat-check">✓</div>
+        <div class="kat-name">Notify</div>
+        <div class="kat-desc">Buka halaman<br>Notifikasi di app</div>
       </div>
-      <p style="font-size:13px;color:#3a5068;margin-bottom:14px;line-height:1.5;">
-        Pilih halaman yang dibuka di aplikasi saat notifikasi diklik
-      </p>
-      <div class="kat-grid">
-        <div class="kat-item kat-notify" id="card-notify" onclick="fcmSelectKat('notify')">
-          <div class="kat-check">✓</div>
-          <div class="kat-name">Notify</div>
-          <div class="kat-desc">Buka halaman<br>Notifikasi di app</div>
-        </div>
-        <div class="kat-item kat-umum" id="card-umum" onclick="fcmSelectKat('umum')">
-          <div class="kat-check">✓</div>
-          <div class="kat-name">Umum</div>
-          <div class="kat-desc">Buka aplikasi<br>ke halaman Beranda</div>
-        </div>
+      <div class="kat-item kat-umum" id="card-umum" onclick="fcmSelectKat('umum')">
+        <div class="kat-check">✓</div>
+        <div class="kat-name">Umum</div>
+        <div class="kat-desc">Buka aplikasi<br>ke halaman Beranda</div>
       </div>
-      <div class="kat-result" id="kat-result">Pilih kategori di atas untuk melihat detail aksi</div>
+      <div class="kat-item kat-weburl" id="card-weburl" onclick="fcmSelectKat('weburl')">
+        <div class="kat-check">✓</div>
+        <div class="kat-name">Web URL</div>
+        <div class="kat-desc">Buka halaman<br>WebView di app</div>
+      </div>
     </div>
+    
+    <div class="field" id="weburl-field" style="display:none; margin-top:14px;">
+      <label class="field-label">URL Tujuan *</label>
+      <input type="text" id="weburl_url" placeholder="https://contoh.com/halaman">
+    </div>
+    
+    <div class="kat-result" id="kat-result">Pilih kategori di atas untuk melihat detail aksi</div>
 
     <!-- 5. Kirim -->
     <div class="card">
@@ -485,14 +494,19 @@ function fcmSelectKat(type) {
   fcmKat = type;
   document.getElementById('card-notify').classList.toggle('active', type === 'notify');
   document.getElementById('card-umum').classList.toggle('active', type === 'umum');
+  document.getElementById('card-weburl').classList.toggle('active', type === 'weburl');
+  document.getElementById('weburl-field').style.display = type === 'weburl' ? 'block' : 'none';
 
   const el = document.getElementById('kat-result');
   if (type === 'notify') {
     el.className = 'kat-result on-notify';
     el.innerHTML = 'Payload <span class="hl-blue">type</span> <span class="hl-muted">→</span> <span class="hl-blue">"notify"</span> &nbsp;·&nbsp; App akan membuka <strong>halaman Notifikasi</strong>';
-  } else {
+  } else if (type === 'umum') {
     el.className = 'kat-result on-umum';
     el.innerHTML = 'Payload <span class="hl-green">type</span> <span class="hl-muted">→</span> <span class="hl-green">"umum"</span> &nbsp;·&nbsp; App akan membuka <strong>halaman Beranda</strong>';
+  } else {
+    el.className = 'kat-result on-weburl';
+    el.innerHTML = 'Payload <span class="hl-indigo">type</span> <span class="hl-muted">→</span> <span class="hl-indigo">"link"</span> &nbsp;·&nbsp; App akan membuka <strong>WebView</strong> dengan URL di atas';
   }
 }
 
@@ -510,22 +524,27 @@ async function fcmSend() {
 
   if (!title)  return fcmShowToast('Judul notifikasi wajib diisi', 'error');
   if (!body)   return fcmShowToast('Isi pesan wajib diisi', 'error');
-  if (!fcmKat) return fcmShowToast('Pilih kategori Notify atau Umum', 'error');
+  if (!fcmKat) return fcmShowToast('Pilih kategori Notify, Umum, atau Web URL', 'error');
 
-  const data    = { type: fcmKat };
-  let   payload = { title, body, data };
+  const payloadType = fcmKat === 'weburl' ? 'link' : fcmKat;
+  const data = { type: payloadType };
+
+  if (fcmKat === 'weburl') {
+    const weburl = document.getElementById('weburl_url').value.trim();
+    if (!weburl) return fcmShowToast('URL tujuan wajib diisi', 'error');
+    data.url = weburl;
+  }
+
+  let payload = { title, body, data };
 
   if (fcmMode === 'specific') {
-    const token     = document.getElementById('fcm_token').value.trim();
-    const no_rm     = document.getElementById('no_rm').value.trim();
-    const device_id = document.getElementById('device_id').value.trim();
+    const token = document.getElementById('fcm_token').value.trim();
     if (!token) return fcmShowToast('FCM Token wajib diisi untuk spesifik user', 'error');
-    if (no_rm)     data.no_rm     = no_rm;
-    if (device_id) data.device_id = device_id;
     payload.token = token;
   } else {
     payload.topic = 'semua_user';
   }
+
 
   const btn = document.getElementById('send-btn');
   btn.classList.add('loading');
