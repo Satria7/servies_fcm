@@ -230,7 +230,7 @@
   #fcm-root .preview-title { font-size: 13px; font-weight: 700; color: #111e2b; margin-bottom: 3px; }
   #fcm-root .preview-desc { font-size: 12px; color: #7a92a8; font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
 
-  #fcm-root .kat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  #fcm-root .kat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 4px; }
 
   #fcm-root .kat-item { border-radius: 12px; padding: 20px 16px; cursor: pointer; transition: all 0.18s; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; border: 1.5px solid #dce6ef; background: #f6f9fc; position: relative; }
 
@@ -238,29 +238,34 @@
   #fcm-root .kat-notify.active { border-color: #07B8A4; background: rgba(7,184,164,0.06); box-shadow: 0 0 0 3px rgba(7,184,164,0.1); }
   #fcm-root .kat-umum:hover { border-color: #2a7a4e; background: rgba(42,122,78,0.03); }
   #fcm-root .kat-umum.active { border-color: #2a7a4e; background: rgba(42,122,78,0.06); box-shadow: 0 0 0 3px rgba(42,122,78,0.08); }
-
   #fcm-root .kat-weburl:hover { border-color: #4f46e5; background: rgba(79,70,229,0.03); }
   #fcm-root .kat-weburl.active { border-color: #4f46e5; background: rgba(79,70,229,0.06); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
-  #fcm-root .kat-weburl.active .kat-check { background: #4f46e5; border-color: #4f46e5; color: white; }
-  #fcm-root .kat-weburl .kat-name { color: #4338ca; }
-  #fcm-root .kat-result.on-weburl { border-color: rgba(79,70,229,0.3); background: rgba(79,70,229,0.04); color: #3a5068; }
-  #fcm-root .hl-indigo { color: #4338ca; font-weight: 700; }
+  #fcm-root .kat-skdp:hover { border-color: #b45309; background: rgba(180,83,9,0.03); }
+  #fcm-root .kat-skdp.active { border-color: #b45309; background: rgba(180,83,9,0.06); box-shadow: 0 0 0 3px rgba(180,83,9,0.1); }
 
   #fcm-root .kat-check { position: absolute; top: 10px; right: 12px; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #dce6ef; display: flex; align-items: center; justify-content: center; font-size: 9px; transition: all 0.15s; color: transparent; }
   #fcm-root .kat-notify.active .kat-check { background: #07B8A4; border-color: #07B8A4; color: white; }
   #fcm-root .kat-umum.active .kat-check { background: #2a7a4e; border-color: #2a7a4e; color: white; }
+  #fcm-root .kat-weburl.active .kat-check { background: #4f46e5; border-color: #4f46e5; color: white; }
+  #fcm-root .kat-skdp.active .kat-check { background: #b45309; border-color: #b45309; color: white; }
 
   #fcm-root .kat-name { font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
   #fcm-root .kat-notify .kat-name { color: #069B8D; }
   #fcm-root .kat-umum .kat-name { color: #2a7a4e; }
+  #fcm-root .kat-weburl .kat-name { color: #4338ca; }
+  #fcm-root .kat-skdp .kat-name { color: #b45309; }
   #fcm-root .kat-desc { font-size: 11px; color: #7a92a8; font-family: 'JetBrains Mono', monospace; line-height: 1.5; }
 
   #fcm-root .kat-result { margin-top: 12px; border-radius: 10px; padding: 11px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; border: 1.5px solid #dce6ef; color: #7a92a8; background: #f6f9fc; transition: all 0.25s; line-height: 1.5; }
   #fcm-root .kat-result.on-notify { border-color: rgba(7,184,164,0.3); background: rgba(7,184,164,0.05); color: #3a5068; }
   #fcm-root .kat-result.on-umum  { border-color: rgba(42,122,78,0.25); background: rgba(42,122,78,0.04); color: #3a5068; }
-  #fcm-root .hl-blue  { color: #069B8D; font-weight: 700; }
-  #fcm-root .hl-green { color: #2a7a4e; font-weight: 700; }
-  #fcm-root .hl-muted { color: #7a92a8; }
+  #fcm-root .kat-result.on-weburl { border-color: rgba(79,70,229,0.3); background: rgba(79,70,229,0.04); color: #3a5068; }
+  #fcm-root .kat-result.on-skdp { border-color: rgba(180,83,9,0.3); background: rgba(180,83,9,0.04); color: #3a5068; }
+  #fcm-root .hl-blue   { color: #069B8D; font-weight: 700; }
+  #fcm-root .hl-green  { color: #2a7a4e; font-weight: 700; }
+  #fcm-root .hl-indigo { color: #4338ca; font-weight: 700; }
+  #fcm-root .hl-amber  { color: #b45309; font-weight: 700; }
+  #fcm-root .hl-muted  { color: #7a92a8; }
 
   #fcm-root .btn-send {
     all: unset;
@@ -354,16 +359,6 @@
         <label class="field-label">FCM Token *</label>
         <textarea id="fcm_token" placeholder="Paste FCM token device tujuan..."></textarea>
       </div>
-      <!-- <div class="field-row">
-        <div class="field">
-          <label class="field-label">No. Rekam Medis</label>
-          <input type="text" id="no_rm" placeholder="77777777">
-        </div>
-        <div class="field">
-          <label class="field-label">Device ID</label>
-          <input type="text" id="device_id" placeholder="TKQ1.221114.001">
-        </div>
-      </div> -->
     </div>
 
     <!-- 2b. Broadcast -->
@@ -410,30 +405,44 @@
     </div>
 
     <!-- 4. Kategori -->
-    <div class="kat-grid" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="kat-item kat-notify" id="card-notify" onclick="fcmSelectKat('notify')">
-        <div class="kat-check">✓</div>
-        <div class="kat-name">Notify</div>
-        <div class="kat-desc">Buka halaman<br>Notifikasi di app</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-step">4</div>
+        <div class="card-title">Kategori Aksi</div>
       </div>
-      <div class="kat-item kat-umum" id="card-umum" onclick="fcmSelectKat('umum')">
-        <div class="kat-check">✓</div>
-        <div class="kat-name">Umum</div>
-        <div class="kat-desc">Buka aplikasi<br>ke halaman Beranda</div>
+      <p style="font-size:13px;color:#3a5068;margin-bottom:14px;line-height:1.5;">
+        Pilih halaman yang dibuka di aplikasi saat notifikasi diklik
+      </p>
+      <div class="kat-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="kat-item kat-notify" id="card-notify" onclick="fcmSelectKat('notify')">
+          <div class="kat-check">✓</div>
+          <div class="kat-name">Notify</div>
+          <div class="kat-desc">Buka halaman<br>Notifikasi di app</div>
+        </div>
+        <div class="kat-item kat-umum" id="card-umum" onclick="fcmSelectKat('umum')">
+          <div class="kat-check">✓</div>
+          <div class="kat-name">Umum</div>
+          <div class="kat-desc">Buka aplikasi<br>ke halaman Beranda</div>
+        </div>
+        <div class="kat-item kat-weburl" id="card-weburl" onclick="fcmSelectKat('weburl')">
+          <div class="kat-check">✓</div>
+          <div class="kat-name">Web URL</div>
+          <div class="kat-desc">Buka halaman<br>WebView di app</div>
+        </div>
+        <div class="kat-item kat-skdp" id="card-skdp" onclick="fcmSelectKat('skdp')">
+          <div class="kat-check">✓</div>
+          <div class="kat-name">SKDP</div>
+          <div class="kat-desc">Buka halaman<br>SKDP di app</div>
+        </div>
       </div>
-      <div class="kat-item kat-weburl" id="card-weburl" onclick="fcmSelectKat('weburl')">
-        <div class="kat-check">✓</div>
-        <div class="kat-name">Web URL</div>
-        <div class="kat-desc">Buka halaman<br>WebView di app</div>
+
+      <div class="field" id="weburl-field" style="display:none; margin-top:14px;">
+        <label class="field-label">URL Tujuan *</label>
+        <input type="text" id="weburl_url" placeholder="https://contoh.com/halaman">
       </div>
+
+      <div class="kat-result" id="kat-result">Pilih kategori di atas untuk melihat detail aksi</div>
     </div>
-    
-    <div class="field" id="weburl-field" style="display:none; margin-top:14px;">
-      <label class="field-label">URL Tujuan *</label>
-      <input type="text" id="weburl_url" placeholder="https://contoh.com/halaman">
-    </div>
-    
-    <div class="kat-result" id="kat-result">Pilih kategori di atas untuk melihat detail aksi</div>
 
     <!-- 5. Kirim -->
     <div class="card">
@@ -495,6 +504,7 @@ function fcmSelectKat(type) {
   document.getElementById('card-notify').classList.toggle('active', type === 'notify');
   document.getElementById('card-umum').classList.toggle('active', type === 'umum');
   document.getElementById('card-weburl').classList.toggle('active', type === 'weburl');
+  document.getElementById('card-skdp').classList.toggle('active', type === 'skdp');
   document.getElementById('weburl-field').style.display = type === 'weburl' ? 'block' : 'none';
 
   const el = document.getElementById('kat-result');
@@ -504,9 +514,12 @@ function fcmSelectKat(type) {
   } else if (type === 'umum') {
     el.className = 'kat-result on-umum';
     el.innerHTML = 'Payload <span class="hl-green">type</span> <span class="hl-muted">→</span> <span class="hl-green">"umum"</span> &nbsp;·&nbsp; App akan membuka <strong>halaman Beranda</strong>';
-  } else {
+  } else if (type === 'weburl') {
     el.className = 'kat-result on-weburl';
-    el.innerHTML = 'Payload <span class="hl-indigo">type</span> <span class="hl-muted">→</span> <span class="hl-indigo">"link"</span> &nbsp;·&nbsp; App akan membuka <strong>WebView</strong> dengan URL di atas';
+    el.innerHTML = 'Payload <span class="hl-indigo">type</span> <span class="hl-muted">→</span> <span class="hl-indigo">"link"</span> &nbsp;·&nbsp; App akan membuka <strong>WebView</strong> dengan URL yang diisi di atas';
+  } else {
+    el.className = 'kat-result on-skdp';
+    el.innerHTML = 'Payload <span class="hl-amber">type</span> <span class="hl-muted">→</span> <span class="hl-amber">"skdp"</span> &nbsp;·&nbsp; App akan membuka <strong>halaman SKDP</strong>';
   }
 }
 
@@ -524,8 +537,10 @@ async function fcmSend() {
 
   if (!title)  return fcmShowToast('Judul notifikasi wajib diisi', 'error');
   if (!body)   return fcmShowToast('Isi pesan wajib diisi', 'error');
-  if (!fcmKat) return fcmShowToast('Pilih kategori Notify, Umum, atau Web URL', 'error');
+  if (!fcmKat) return fcmShowToast('Pilih kategori Notify, Umum, Web URL, atau SKDP', 'error');
 
+  // Payload type: kartu "Web URL" di CMS dikirim ke app sebagai type "link"
+  // Kartu lain (notify, umum, skdp) dikirim apa adanya
   const payloadType = fcmKat === 'weburl' ? 'link' : fcmKat;
   const data = { type: payloadType };
 
@@ -544,7 +559,6 @@ async function fcmSend() {
   } else {
     payload.topic = 'semua_user';
   }
-
 
   const btn = document.getElementById('send-btn');
   btn.classList.add('loading');
